@@ -1,4 +1,5 @@
 package com.pro06.config;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Log4j2
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -32,6 +34,7 @@ public class SecurityConfig {
                 // 로그인
                 .formLogin((formLogin) -> {
                     /* 권한이 필요한 요청은 해당 url로 리다이렉트 */
+                    log.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡformLoginㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
                     formLogin
                             .loginPage("/login")
                             .defaultSuccessUrl("/")

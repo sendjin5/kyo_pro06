@@ -19,7 +19,7 @@
 
                             <h2 class="text-uppercase text-center mt-3 mb-5">회원가입</h2>
 
-                            <form name="frm1" id="frm1" th:action="@{member/joinPro}" method="post" onsubmit="return joinCheck(this)">
+                            <form name="frm1" id="frm1" th:action="@{/joinPro}" method="post" onsubmit="return joinCheck(this)">
 
                                 <div class="form-outline mb-4">
                                     <input type="text" name="id" id="id" placeholder="영문소문자 및 숫자를 혼용하여 아이디 입력" class="form-control" maxlength="16" autofocus required />

@@ -3,22 +3,51 @@ package com.pro06;
 import com.pro06.entity.User;
 import com.pro06.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+import java.util.stream.IntStream;
+
+
 @SpringBootTest
-class pro06Tests {
+public class pro06Tests {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private UserRepository userRepository;
+//
+//    @Test
+//    public void Userinsert(){
+//            User user = User.builder()
+//                    .id("adminㅡㅡㅡㅡ1112131311")
+//                    .pw("1234")
+//                    .name("name")
+//                    .build();
+//            userRepository.save(user);
+//    }
+
 
     @Test
-    void contextLoads() {
+    public User userget(){
+        User user = userRepository.getId("admin");
+        logger.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + user);
+
+
+
+        return user;
     }
-        @Autowired
-        private UserRepository userRepository;
-    
-        @Test
-        public void User(){
-            System.out.println("일단 답은 뭘까");
-        }
+
+    @Test
+    public void userget2(){
+        Integer no = 30;
+        Optional<User> ad = userRepository.findById(no);
+        User user = ad.orElseThrow();
+        logger.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + user);
+    }
 //
 //    @Test
 //    void user(){
