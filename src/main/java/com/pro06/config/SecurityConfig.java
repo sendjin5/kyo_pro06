@@ -9,6 +9,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Log4j2
 @Configuration
@@ -34,7 +35,6 @@ public class SecurityConfig {
                 // 로그인
                 .formLogin((formLogin) -> {
                     /* 권한이 필요한 요청은 해당 url로 리다이렉트 */
-                    log.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡformLoginㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
                     formLogin
                             .loginPage("/login")
                             .defaultSuccessUrl("/")
@@ -46,7 +46,7 @@ public class SecurityConfig {
                 // 로그아웃
                 .logout((logout) -> {
                     logout
-                            .logoutUrl("/logout")
+                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                             .invalidateHttpSession(true)
                             .logoutSuccessUrl("/");
                 })
@@ -55,12 +55,14 @@ public class SecurityConfig {
                     exceptionHandling.authenticationEntryPoint(new CustomAuthenticationEntryPoint());
                 })*/
                 // 중복 로그인 방지
+
                 .sessionManagement((sessionManagement) -> {
                     sessionManagement.sessionFixation().changeSessionId()
                             .maximumSessions(1)
                             .maxSessionsPreventsLogin(false)
                             .sessionRegistry(sessionRegistry());
                 })
+
                 .build();
     }
     @Bean

@@ -1,5 +1,6 @@
 package com.pro06;
 
+import com.pro06.entity.Role;
 import com.pro06.entity.User;
 import com.pro06.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -30,32 +33,14 @@ public class pro06Tests {
 //            userRepository.save(user);
 //    }
 
-
-    @Test
-    public User userget(){
-        User user = userRepository.getId("admin");
-        logger.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + user);
-
-
-
-        return user;
-    }
-
-    @Test
-    public void userget2(){
-        Integer no = 30;
-        Optional<User> ad = userRepository.findById(no);
-        User user = ad.orElseThrow();
-        logger.info("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + user);
-    }
 //
 //    @Test
-//    void user(){
-//        List<User> user = userRepository.findAll();
-//        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + user);
-//        log.info(" ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + user);
-//
+//    public void userget(){
+//        User user = userRepository.getId1("admin");
+//        logger.info("11ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ" + user);
+//        System.out.println(user);
 //    }
+
 
 
 //        @Test

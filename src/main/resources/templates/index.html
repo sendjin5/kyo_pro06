@@ -18,6 +18,36 @@
 
     <th:block sec:authorize="isAuthenticated()">
         <h2>로그인 성공</h2>
+
     </th:block>
+
+    <th:block sec:authorize="isAnonymous()">
+        <h2> 로그아웃 상태</h2>
+    </th:block>
+
+    <!--인증시 사용된 객체에 대한 정보-->
+    <b>Authenticated DTO:</b>
+    <div sec:authentication="principal"></div>
+
+    <!--인증시 사용된 객체의 Username (ID)-->
+    <b>Authenticated username:</b>
+    <div sec:authentication="name"></div>
+
+    <!--객체의 권한-->
+<!--    <b>Authenticated user role:</b>-->
+<!--    <div sec:authentication="principal.getAuthorities()">-->
+<!--    </div>-->
+
+
+    <th:block sec:authorize="hasAuthority('ADMIN')">
+        <h2> 권한이 관리자입니다.</h2>
+    </th:block>
+    <th:block sec:authorize="hasAuthority('ROLE_USER')">
+        <h2> 권한이 유저입니다.</h2>
+    </th:block>
+    <th:block sec:authorize="hasAuthority('USER')">
+        <h2> 권한이 유저저저입니다.</h2>
+    </th:block>
+
 </body>
 </html>
