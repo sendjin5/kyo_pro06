@@ -34,13 +34,12 @@ public class SecurityConfig {
                 })
                 // 로그인
                 .formLogin((formLogin) -> {
-                    /* 권한이 필요한 요청은 해당 url로 리다이렉트 */
                     formLogin
                             .loginPage("/login")
                             .defaultSuccessUrl("/")
                             .loginProcessingUrl("/auth")    // POST 요청 (login 창에 입력한 데이터를 처리)
-                            .usernameParameter("id")  // login에 필요한 id 값을 email로 설정 (default는 username)
-                            .passwordParameter("pw")  // login에 필요한 password 값을 password(default)로 설정
+                            .usernameParameter("id")
+                            .passwordParameter("pw")
                             .failureUrl("/error");
                 })
                 // 로그아웃
@@ -55,7 +54,6 @@ public class SecurityConfig {
                     exceptionHandling.authenticationEntryPoint(new CustomAuthenticationEntryPoint());
                 })*/
                 // 중복 로그인 방지
-
                 .sessionManagement((sessionManagement) -> {
                     sessionManagement.sessionFixation().changeSessionId()
                             .maximumSessions(1)

@@ -3,6 +3,7 @@ package com.pro06.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
@@ -23,6 +24,7 @@ public class User extends BaseEntity {
     private String pw;
     private String name;
     @Column(nullable = true)
+    @ColumnDefault("")
     private String tel;
     @Column(nullable = true)
     private String email;
@@ -39,19 +41,4 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static User createuser(User user){
-                user.setId(user.getId());
-                user.setName(user.getName());
-                user.setTel(user.getTel());
-                user.setEmail(user.getEmail());
-                user.setAddr1(user.getAddr1());
-                user.setAddr2(user.getAddr2());
-                user.setPostcode(user.getPostcode());
-                user.setStatus(Status.ACTIVE);
-                user.setRole(Role.USER);
-                user.setPw(user.getPw());
-                return user;
-
     }
-
-}
