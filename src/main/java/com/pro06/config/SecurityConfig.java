@@ -1,5 +1,7 @@
 package com.pro06.config;
+import com.pro06.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -36,11 +39,12 @@ public class SecurityConfig {
                 .formLogin((formLogin) -> {
                     formLogin
                             .loginPage("/login")
-                            .defaultSuccessUrl("/")
-                            .loginProcessingUrl("/auth")    // POST 요청 (login 창에 입력한 데이터를 처리)
+                            .loginProcessingUrl("/loginPro")
+                            .failureUrl("/login?error=true")
+                            .defaultSuccessUrl("/status")
                             .usernameParameter("id")
                             .passwordParameter("pw")
-                            .failureUrl("/error");
+                            ;
                 })
                 // 로그아웃
                 .logout((logout) -> {
@@ -50,9 +54,9 @@ public class SecurityConfig {
                             .logoutSuccessUrl("/");
                 })
                 // 인증 관련 예외, 사용하면 에러페이지 발생해서 주석처리
-                /*.exceptionHandling((exceptionHandling) -> {
+                .exceptionHandling((exceptionHandling) -> {
                     exceptionHandling.authenticationEntryPoint(new CustomAuthenticationEntryPoint());
-                })*/
+                })
                 // 중복 로그인 방지
                 .sessionManagement((sessionManagement) -> {
                     sessionManagement.sessionFixation().changeSessionId()
@@ -60,7 +64,6 @@ public class SecurityConfig {
                             .maxSessionsPreventsLogin(false)
                             .sessionRegistry(sessionRegistry());
                 })
-
                 .build();
     }
     @Bean

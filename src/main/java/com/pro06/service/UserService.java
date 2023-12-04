@@ -8,5 +8,7 @@ public interface UserService {
     public User userInsert(User user);
     public PasswordEncoder passwordEncoder();
     public User getId(String id);
-    User userUpdate(User user);
+    public User userUpdate(User user);
+    public int loginPro(String id);
+
 }

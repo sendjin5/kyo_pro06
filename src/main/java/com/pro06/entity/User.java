@@ -3,12 +3,15 @@ package com.pro06.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CurrentTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "User")
@@ -24,7 +27,6 @@ public class User extends BaseEntity {
     private String pw;
     private String name;
     @Column(nullable = true)
-    @ColumnDefault("")
     private String tel;
     @Column(nullable = true)
     private String email;
@@ -35,10 +37,14 @@ public class User extends BaseEntity {
     @Column(nullable = true)
     private String postcode;
 
+    @CreatedDate
+    private LocalDateTime loginAt;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
     }

@@ -1,8 +1,10 @@
 package com.pro06.config;
 
 import com.pro06.entity.Role;
+import com.pro06.entity.Status;
 import com.pro06.entity.User;
 import com.pro06.service.UserService;
+import com.pro06.util.OutException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,7 +15,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,17 +41,17 @@ public class AuthProvider implements AuthenticationProvider {
         User userVo = userService.getId(id);
 
         if (userVo != null && passwordEncoder.matches(pw, userVo.getPw())) { // 일치하는 user 정보가 있는지 확인
-            List<GrantedAuthority> roles = new ArrayList<>();
-            if(userVo.getRole().equals(Role.ADMIN)){
-                roles.add(new SimpleGrantedAuthority("ADMIN")); // 권한 부여
-            } else if(userVo.getRole().equals(Role.TEACHER)){
-                roles.add(new SimpleGrantedAuthority("TEACHER")); // 권한 부여
-            } else {
-                roles.add(new SimpleGrantedAuthority("USER")); // 권한 부여
-            }
-            token = new UsernamePasswordAuthenticationToken(userVo.getId(), null, roles);
-            // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token
-            return token;
+                List<GrantedAuthority> roles = new ArrayList<>();
+                if (userVo.getRole().equals(Role.ADMIN)) {
+                    roles.add(new SimpleGrantedAuthority("ADMIN")); // 권한 부여
+                } else if (userVo.getRole().equals(Role.TEACHER)) {
+                    roles.add(new SimpleGrantedAuthority("TEACHER")); // 권한 부여
+                } else {
+                    roles.add(new SimpleGrantedAuthority("USER")); // 권한 부여
+                }
+                token = new UsernamePasswordAuthenticationToken(userVo.getId(), null, roles);
+                // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token
+                return token;
         }
 
         throw new BadCredentialsException("No such user or wrong password.");
