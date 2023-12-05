@@ -31,7 +31,7 @@ public class SecurityConfig {
                             .requestMatchers("/user/**").authenticated() // 인증된, 로그인 한 사람만 접근 가능
                             .requestMatchers("/admin/**").hasAuthority("ADMIN") // admin만 접근 가능
                             .requestMatchers("/css/**", "/js/**", "/upload/**", "/cleditor/**", "/scss/**",
-                                    "/vendors/**", "/ckeditor/**", "/webfonts/**", "/resource/**")
+                                    "/vendors/**", "/ckeditor/**", "/webfonts/**", "/resource/**", "/assets/**")
                             .permitAll() // 모두 접근 가능
                             .anyRequest().permitAll();
                 })

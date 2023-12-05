@@ -27,8 +27,18 @@
         </tbody>
 </table>
 
-    <a th:href="@{/out}">권한수정1</a>
-
+    <form th:action="@{/out}" method="post">
+    <div class="col-2"><label for="role" class="form-label">권한 수정</label></div>
+    <div class="col-4">
+        <select name="role" id="role" class="form-select">
+            <option value="선택">선택</option>
+            <option value="ADMIN">관리자</option>
+            <option value="USER">유저</option>
+            <option value="TEACHER">선생님</option>
+        </select>
+    </div>
+        <button type="submit">권한 변경</button>
+    </form>
 
     <h2>user</h2>
     <table>

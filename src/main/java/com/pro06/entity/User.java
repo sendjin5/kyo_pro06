@@ -36,6 +36,8 @@ public class User extends BaseEntity {
     private String addr2;
     @Column(nullable = true)
     private String postcode;
+    @Column(nullable = true)
+    private String img;
 
     @CreatedDate
     private LocalDateTime loginAt;

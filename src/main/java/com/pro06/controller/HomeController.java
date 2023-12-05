@@ -31,12 +31,10 @@ public class HomeController {
         return "index";
     }
 
-
     @GetMapping("/term")
     public String Term(Model model){
         return "/user/joinTerm";
     }
-
 
     @GetMapping("/login")
     public String Login(Model model){
@@ -62,7 +60,7 @@ public class HomeController {
             return "/alert";
         } else if (pass==3){
             model.addAttribute("msg", "해당 계정은 탈퇴한 계정입니다.");
-            model.addAttribute("url", "/logout");
+            model.addAttribute("url", "/");
             return "/alert";
         } else {
             model.addAttribute("msg", "로그인 정보가 맞지 않습니다.");
@@ -89,19 +87,19 @@ public class HomeController {
         return "/index";
     }
 
-    @GetMapping("/Exindex")
+    @GetMapping("/myPage")
     public String Exindex(Model model, Principal principal){
         User user = userService.getId(principal.getName());
         model.addAttribute("principal", principal);
         model.addAttribute("user", user);
-        return "/user/Exindex";
+        return "/user/myPage";
     }
 
-    @GetMapping("/out")
-    public String out1(Principal principal, Model model){
+    @PostMapping("/out")
+    public String out1(Principal principal, Model model, Role role){
         User user = userService.getId(principal.getName());
-        user.setRole(Role.ADMIN);
-        user.setAddr1("123번지");
+        user.setRole(role);
+        user.setAddr1("1234번지");
         userService.userUpdate(user);
         return "redirect:/";
     }
